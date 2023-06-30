@@ -10,4 +10,9 @@ export class HSLColor {
     this.lightness = lightness;
     this.alpha = alpha;
   }
+
+  // Special methods
+  toString(): string {
+    return `hsla(${this.hue}%, ${this.saturation}%, ${this.lightness}%, ${this.alpha})`;
+  }
 }
