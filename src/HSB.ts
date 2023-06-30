@@ -10,4 +10,9 @@ export class HSBColor {
     this.brightness = brightness;
     this.alpha = alpha;
   }
+
+  // Special methods
+  toString(): string {
+    return `hsba(${this.hue}%, ${this.saturation}%, ${this.brightness}%, ${this.alpha})`;
+  }
 }
