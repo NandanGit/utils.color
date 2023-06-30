@@ -10,4 +10,9 @@ export class RGBColor {
     this.blue = blue;
     this.alpha = alpha;
   }
+
+  // Special methods
+  toString(): string {
+    return `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.alpha})`;
+  }
 }
