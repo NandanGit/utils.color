@@ -1,0 +1,25 @@
+{
+	"name": "@nandn/colors",
+	"version": "0.0.0",
+	"description": "A collection of classes and functions related to colors.",
+	"main": "dist/index.js",
+	"scripts": {
+		"sandbox": "nodemon sandbox/index.ts"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/NandanGit/utils.color.git"
+	},
+	"keywords": [
+		"color",
+		"colors",
+		"react-color",
+		"react-colors"
+	],
+	"author": "Nandan Reddy",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/NandanGit/utils.color/issues"
+	},
+	"homepage": "https://github.com/NandanGit/utils.color#readme"
+}
