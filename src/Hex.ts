@@ -1,3 +1,5 @@
+import { RGBColor } from './RGB';
+
 export class HexColor {
   readonly red: string;
   readonly green: string;
@@ -61,6 +63,16 @@ export class HexColor {
     }
 
     return [r, g, b, a];
+  }
+
+  // Conversion methods
+  toRGB(bits = 8): RGBColor {
+    const r = parseInt(this.red, 16);
+    const g = parseInt(this.green, 16);
+    const b = parseInt(this.blue, 16);
+    const a = parseInt(this.alpha, 16) / 255;
+
+    return new RGBColor(r, g, b, a, bits);
   }
 
   // Special methods
