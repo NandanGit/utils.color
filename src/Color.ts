@@ -4,8 +4,17 @@ import { RGBColor } from './RGB';
 
 type ColorFormat = 'rgb' | 'hex' | RGBColor | HSLColor | HexColor;
 
+export type Bits = number;
+
 export class Color<Format extends ColorFormat> {
   private color: HSLColor;
+
+  private _h: number;
+  private _s: number;
+  private _l: number;
+  private _p: number;
+  private _q: number;
+
   constructor(
     ...args: Format extends 'hex'
       ? [hexString: string]
@@ -23,13 +32,13 @@ export class Color<Format extends ColorFormat> {
   ) {
     if (args.length === 1) {
       if (typeof args[0] === 'string') {
-        this.color = new HexColor(args[0]).toHSL(); // Optimize this by adding a toHSL method to HexColor
+        this.color = new HexColor(args[0]).toHSL();
       } else if (args[0] instanceof RGBColor) {
         this.color = args[0].toHSL();
       } else if (args[0] instanceof HSLColor) {
         this.color = args[0];
       } else if (args[0] instanceof HexColor) {
-        this.color = args[0].toHSL(); // Optimize this by adding a toHSL method to HexColor
+        this.color = args[0].toHSL();
       } else {
         throw new Error('Invalid argument');
       }
@@ -46,6 +55,15 @@ export class Color<Format extends ColorFormat> {
     } else {
       throw new Error('Invalid arguments');
     }
+
+    this._h = this.hue / 360;
+    this._s = this.saturation / 100;
+    this._l = this.lightness / 100;
+    this._p =
+      this._l < 0.5
+        ? this._l * (1 + this._s)
+        : this._l + this._s - this._l * this._s;
+    this._q = 2 * this._l - this._p;
   }
 
   // Computed properties
@@ -59,6 +77,38 @@ export class Color<Format extends ColorFormat> {
 
   get lightness(): number {
     return this.color.lightness;
+  }
+
+  get alpha(): number {
+    return this.color.alpha;
+  }
+
+  get bits(): Bits {
+    return this.color.bits;
+  }
+
+  get red(): number {
+    return this.toRGB().red;
+  }
+
+  get green(): number {
+    return this.toRGB().green;
+  }
+
+  get blue(): number {
+    return this.toRGB().blue;
+  }
+
+  get hex(): string {
+    return this.toHex().toString();
+  }
+
+  get rgb(): string {
+    return this.toRGB().toString();
+  }
+
+  get hsl(): string {
+    return this.toHSL().toString();
   }
 
   // Conversion methods
@@ -77,5 +127,15 @@ export class Color<Format extends ColorFormat> {
   // Special methods
   toString(): string {
     return this.color.toRGB().toString();
+  }
+
+  // Helper methods
+  private hueToRGB(p: number, q: number, t: number): number {
+    if (t < 0) t += 1;
+    if (t > 1) t -= 1;
+    if (t < 1 / 6) return p + (q - p) * 6 * t;
+    if (t < 1 / 2) return q;
+    if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+    return p;
   }
 }
