@@ -79,6 +79,9 @@ export class HSLColor {
 
   // Special methods
   toString(): string {
-    return `hsla(${this.hue}%, ${this.saturation}%, ${this.lightness}%, ${this.alpha})`;
+    const isOpaque = this.alpha === 1;
+    return `hsl${!isOpaque ? 'a' : ''}(${this.hue}%, ${this.saturation}%, ${
+      this.lightness
+    }%${!isOpaque ? `, ${this.alpha}` : ''})`;
   }
 }
