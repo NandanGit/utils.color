@@ -24,7 +24,7 @@ export class RGBColor {
       .toString(16)
       .padStart(2, '0');
 
-    return new HexColor(`#${r}${g}${b}${a}`);
+    return new HexColor(`#${r}${g}${b}${a}`, this.bits);
   }
 
   toHSL(): HSLColor {
@@ -66,7 +66,7 @@ export class RGBColor {
       h /= 6;
     }
 
-    return new HSLColor(h * 360, s * 100, l * 100, this.alpha);
+    return new HSLColor(h * 360, s * 100, l * 100, this.alpha, this.bits);
   }
 
   // Special methods
