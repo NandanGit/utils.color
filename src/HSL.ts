@@ -11,14 +11,14 @@ export class HSLColor {
   ) {
     this.hue = ((hue % 360) + 360) % 360;
     if (saturation >= 0 && saturation <= 100) {
-      this.saturation = saturation;
+      this.saturation = +saturation.toFixed(2);
     } else
       throw new Error(
         'Invalid saturation value: saturation must be between 0 and 100'
       );
 
     if (lightness >= 0 && lightness <= 100) {
-      this.lightness = lightness;
+      this.lightness = +lightness.toFixed(2);
     } else
       throw new Error(
         'Invalid lightness value: lightness must be between 0 and 100'
@@ -80,7 +80,7 @@ export class HSLColor {
   // Special methods
   toString(): string {
     const isOpaque = this.alpha === 1;
-    return `hsl${!isOpaque ? 'a' : ''}(${this.hue}%, ${this.saturation}%, ${
+    return `hsl${!isOpaque ? 'a' : ''}(${this.hue}, ${this.saturation}%, ${
       this.lightness
     }%${!isOpaque ? `, ${this.alpha}` : ''})`;
   }
