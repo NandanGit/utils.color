@@ -82,7 +82,10 @@ export class RGBColor {
   }
 
   // Special methods
-  toString(): string {
+  toString(bits?: Bits): string {
+    if (this.bits !== 8) {
+      return this.scale({ to: 8 }).toString(bits);
+    }
     return `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.alpha})`;
   }
 }
