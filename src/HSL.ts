@@ -8,10 +8,29 @@ export class HSLColor {
     readonly alpha = 1,
     readonly bits = 8
   ) {
-    this.hue = hue;
-    this.saturation = saturation;
-    this.lightness = lightness;
-    this.alpha = alpha;
+    this.hue = ((hue % 360) + 360) % 360;
+    if (saturation >= 0 && saturation <= 100) {
+      this.saturation = saturation;
+    } else
+      throw new Error(
+        'Invalid saturation value: saturation must be between 0 and 100'
+      );
+
+    if (lightness >= 0 && lightness <= 100) {
+      this.lightness = lightness;
+    } else
+      throw new Error(
+        'Invalid lightness value: lightness must be between 0 and 100'
+      );
+
+    if (alpha >= 0 && alpha <= 1) {
+      this.alpha = alpha;
+    } else if (alpha >= 0 && alpha <= 100) {
+      this.alpha = alpha / 100;
+    } else
+      throw new Error(
+        'Invalid alpha value: alpha must be between 0 and 1 or 0 and 100'
+      );
     this.bits = bits;
   }
 
