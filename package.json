@@ -1,0 +1,48 @@
+{
+	"name": "@nandn/colors",
+	"version": "0.0.0",
+	"description": "A collection of classes and functions related to colors.",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"sandbox": "nodemon sandbox/index.ts",
+		"prettier": "prettier --write \"src/**/*.ts\"",
+		"build": "rm -rf dist && tsc",
+		"prepack": "npmignore --auto",
+		"prepublishOnly": "npm run prettier && npm run build"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/NandanGit/utils.color.git"
+	},
+	"keywords": [
+		"color",
+		"colors",
+		"react-color",
+		"react-colors"
+	],
+	"author": "Nandan Reddy <nandan.reddy1133@gmail.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/NandanGit/utils.color/issues"
+	},
+	"homepage": "https://github.com/NandanGit/utils.color#readme",
+	"devDependencies": {
+		"npmignore": "^0.3.0",
+		"prettier": "^2.8.8",
+		"typescript": "^5.1.6"
+	},
+	"publishConfig": {
+		"ignore": [
+			"src",
+			"tests",
+			"tsconfig.json",
+			"rollup.config.js",
+			"jest.config.js",
+			"examples",
+			".prettierrc",
+			".vscode",
+			"!dist"
+		]
+	}
+}
