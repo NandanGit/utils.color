@@ -60,4 +60,22 @@ export class Color<Format extends ColorFormat> {
   get lightness(): number {
     return this.color.lightness;
   }
+
+  // Conversion methods
+  toRGB(): RGBColor {
+    return this.color.toRGB();
+  }
+
+  toHex(): HexColor {
+    return this.color.toHex();
+  }
+
+  toHSL(): HSLColor {
+    return this.color;
+  }
+
+  // Special methods
+  toString(): string {
+    return this.color.toRGB().toString();
+  }
 }
