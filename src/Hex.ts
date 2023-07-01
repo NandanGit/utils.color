@@ -1,3 +1,4 @@
+import { HSLColor } from './HSL';
 import { RGBColor } from './RGB';
 
 export class HexColor {
@@ -6,7 +7,7 @@ export class HexColor {
   readonly blue: string;
   readonly alpha: string;
 
-  constructor(private hexString: string) {
+  constructor(private hexString: string, private preservedBits = 8) {
     const [r, g, b, a] = this.getComponentsFromHex(hexString);
     this.red = r;
     this.green = g;
@@ -66,13 +67,17 @@ export class HexColor {
   }
 
   // Conversion methods
-  toRGB(bits = 8): RGBColor {
+  toRGB(): RGBColor {
     const r = parseInt(this.red, 16);
     const g = parseInt(this.green, 16);
     const b = parseInt(this.blue, 16);
     const a = parseInt(this.alpha, 16) / 255;
 
-    return new RGBColor(r, g, b, a, bits);
+    return new RGBColor(r, g, b, a, this.preservedBits);
+  }
+
+  toHSL(): HSLColor {
+    return this.toRGB().toHSL(); // Find a better solution
   }
 
   // Special methods
