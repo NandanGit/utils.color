@@ -86,6 +86,10 @@ export class RGBColor {
     if (this.bits !== 8) {
       return this.scale({ to: 8 }).toString(bits);
     }
-    return `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.alpha})`;
+    // return `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.alpha})`;
+    const isOpaque = this.alpha === 1;
+    return `rgb${!isOpaque ? 'a' : ''}(${this.red}, ${this.green}, ${
+      this.blue
+    }${!isOpaque ? `, ${this.alpha}` : ''})`;
   }
 }
