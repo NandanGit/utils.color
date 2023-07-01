@@ -1,3 +1,4 @@
+import { Bits } from './Color';
 import { HexColor } from './Hex';
 import { RGBColor } from './RGB';
 export class HSLColor {
@@ -6,7 +7,7 @@ export class HSLColor {
     readonly saturation: number,
     readonly lightness: number,
     readonly alpha = 1,
-    readonly bits = 8
+    readonly bits: Bits = 8
   ) {
     this.hue = ((hue % 360) + 360) % 360;
     if (saturation >= 0 && saturation <= 100) {
