@@ -5,16 +5,18 @@ export class HSLColor {
     readonly hue: number,
     readonly saturation: number,
     readonly lightness: number,
-    readonly alpha = 1
+    readonly alpha = 1,
+    readonly bits = 8
   ) {
     this.hue = hue;
     this.saturation = saturation;
     this.lightness = lightness;
     this.alpha = alpha;
+    this.bits = bits;
   }
 
   // Conversion methods
-  toRGB(bits = 8): RGBColor {
+  toRGB(): RGBColor {
     const h = this.hue / 360;
     const s = this.saturation / 100;
     const l = this.lightness / 100;
@@ -42,7 +44,7 @@ export class HSLColor {
     }
 
     // return [r * 255, g * 255, b * 255];
-    return new RGBColor(r * 255, g * 255, b * 255, this.alpha, bits);
+    return new RGBColor(r * 255, g * 255, b * 255, this.alpha, this.bits);
   }
 
   toHex(): HexColor {
