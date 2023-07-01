@@ -65,9 +65,9 @@ export class HSLColor {
 
     // return [r * 255, g * 255, b * 255];
     return new RGBColor(
-      Math.round(r * 255),
-      Math.round(g * 255),
-      Math.round(b * 255),
+      Math.round(r * (2 ** this.bits - 1)),
+      Math.round(g * (2 ** this.bits - 1)),
+      Math.round(b * (2 ** this.bits - 1)),
       this.alpha,
       this.bits
     );
