@@ -44,7 +44,13 @@ export class HSLColor {
     }
 
     // return [r * 255, g * 255, b * 255];
-    return new RGBColor(r * 255, g * 255, b * 255, this.alpha, this.bits);
+    return new RGBColor(
+      Math.round(r * 255),
+      Math.round(g * 255),
+      Math.round(b * 255),
+      this.alpha,
+      this.bits
+    );
   }
 
   toHex(): HexColor {
